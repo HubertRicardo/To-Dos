@@ -16,8 +16,8 @@ import { useState } from 'react'
 export const App = () => {
   
   
-    const [searchValue, setSearchValue] = useState('')
-    console.log(`se escribio: ${searchValue}`)
+  const [searchValue, setSearchValue] = useState('')
+  console.log(`se escribio: ${searchValue}`)
 
   const [toDos, seToDos] = useState(defaultToDos)
   const completedToDos = toDos.filter(
@@ -31,6 +31,25 @@ export const App = () => {
       return todo.text.toLowerCase().includes(searchValue.toLocaleLowerCase());
      }
   )
+
+  const completeToDos = ()=>{
+    const newToDos = [...toDos];
+    const toDoIndex = newToDos.findIndex(
+      (toDo) => toDo.text == text
+    );
+    newToDos[toDoIndex].completed = true;
+    seToDos(newToDos);
+  };
+
+
+  const deleteToDos = ()=>{
+    const newToDos = [...toDos];
+    const toDoIndex = newToDos.findIndex(
+      (toDo) => toDo.text == text
+    );
+    newToDos.splice(toDoIndex, 1);
+    seToDos(newToDos);
+  };
   
 
   return (
@@ -45,7 +64,13 @@ export const App = () => {
     { 
       searchedToDos.map(
         todos => (
-          <ToDoItem key={todos.text} text={todos.text}/>
+          <ToDoItem 
+          key={todos.text} 
+          text={todos.text} 
+          completed={todos.completed}
+          onComplete={() => completeToDos(toDos.text)}
+          onDelete={() => deleteToDos(toDos.text)}
+          />
         )
       )
     }

@@ -1,15 +1,18 @@
-import { useState } from "react"
 
 
-export const ToDoItem = () => {
-  const [newTasks, setNewTasks] = useState(['cortar cebolla'])
+export const ToDoItem = (props) => {
   return (
-    <ul>
-      {
-        newTasks.map(item => (
-          <li key={item}>{item}</li>
-        ))
-      }
-    </ul>
+    <li>
+      <span
+      onClick={props.onComplete}>
+        v
+      </span>
+      <p>
+        {props.text}
+      </p>
+      <span onClick={props.onDelete}>
+        X
+      </span>
+    </li>
   )
 }
