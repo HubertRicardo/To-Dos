@@ -54,7 +54,7 @@ export const App = () => {
 
   return (
     <>
-    
+    <h1 className='text-3xl font-bold underline'>Hola</h1>
     <ToDoCounter total={totalToDos} completed={completedToDos}/>
     <ToDoSearch
     searchValue={searchValue}
